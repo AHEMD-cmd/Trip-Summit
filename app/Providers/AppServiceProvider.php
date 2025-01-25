@@ -7,9 +7,10 @@ use App\Services\Payment\CashService;
 use App\Services\Payment\PayPalService;
 use App\Services\Payment\StripeService;
 use Illuminate\Support\ServiceProvider;
-use App\Http\Controllers\Front\FrontController;
 use App\Services\Payment\PaymentMethodInterface;
 use App\Http\Controllers\Front\PaymentController;
+use Illuminate\Support\Facades\View;
+use App\Models\Setting;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -46,5 +47,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrap();
+
+        View::composer('*', function ($view) {
+            $setting = Setting::first();
+            $view->with('setting', $setting);
+        });
     }
 }

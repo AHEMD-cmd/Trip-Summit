@@ -4,7 +4,7 @@
     @php
         $setting = App\Models\Setting::where('id', 1)->first();
     @endphp
-    <div class="page-top" style="background-image: url({{ asset('uploads/' . $setting->banner) }})">
+    <div class="page-top" style="background-image: url({{ $setting->banner }})">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
