@@ -1,9 +1,7 @@
 @extends('front.layout.master')
 
 @section('main_content')
-@php
-$setting = App\Models\Setting::where('id',1)->first();
-@endphp
+
 <div class="page-top" style="background-image: url({{ $setting->banner }})">
     <div class="container">
         <div class="row">
