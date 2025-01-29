@@ -12,8 +12,7 @@ class FaqController extends Controller
 {
     public function index()
     {
-        $faqs = Faq::get();
-        return view('admin.faq.index', compact('faqs'));
+        return view('admin.faq.index', ['faqs' => Faq::all()]);
     }
 
     public function create()
@@ -23,8 +22,7 @@ class FaqController extends Controller
 
     public function store(FaqStoreRequest $request)
     {
-        $data = $request->validated();
-        Faq::create($data);
+        Faq::create($request->validated());
 
         return redirect()->route('faqs.index')->with('success', 'FAQ Created Successfully');
     }
@@ -36,8 +34,7 @@ class FaqController extends Controller
 
     public function update(FaqUpdateRequest $request, Faq $faq)
     {
-        $data = $request->validated();
-        $faq->update($data);
+        $faq->update($request->validated());
 
         return redirect()->route('faqs.index')->with('success', 'FAQ Updated Successfully');
     }
@@ -45,7 +42,7 @@ class FaqController extends Controller
     public function destroy(Faq $faq)
     {
         $faq->delete();
-        return redirect()->route('faqs.index')->with('success', 'FAQ Deleted Successfully');
+        return back()->with('success', 'FAQ Deleted Successfully');
     }
 
 }
